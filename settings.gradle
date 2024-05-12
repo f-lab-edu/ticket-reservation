@@ -1,0 +1,6 @@
+rootProject.name = 'ticketing-project'
+
+include 'ticketing-api'
+include 'ticketing-batch'
+include 'ticketing-core'
+
