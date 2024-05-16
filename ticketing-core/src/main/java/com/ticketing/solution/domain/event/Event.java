@@ -1,0 +1,49 @@
+package com.ticketing.solution.domain.event;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "event")
+public class Event {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "event_type", nullable = false)
+    private EventType eventType;
+
+    @Column(name = "event_name", nullable = false, length = 255)
+    private String eventName;
+
+    @Column(name = "description", length = 255)
+    private String description;
+
+    @Column(name = "start_date", nullable = false)
+    private LocalDate startDate;
+
+    @Column(name = "end_date", nullable = false)
+    private LocalDate endDate;
+
+    @Column(name = "ticketing_date", nullable = false)
+    private LocalDate ticketingDate;
+
+    @CreatedDate
+    private LocalDateTime createdDate;
+
+    @LastModifiedDate
+    private LocalDateTime modifiedDate;
+}
