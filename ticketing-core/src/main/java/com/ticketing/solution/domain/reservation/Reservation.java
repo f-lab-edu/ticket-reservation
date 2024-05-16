@@ -13,8 +13,9 @@ import java.time.LocalDateTime;
 @Table(name = "reservation")
 public class Reservation {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "reservation_date", nullable = false)
     private LocalDateTime reservationDate;
@@ -36,7 +37,7 @@ public class Reservation {
     @JoinColumn(name = "seat_id", nullable = false)
     private Seat seat;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

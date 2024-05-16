@@ -16,13 +16,13 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "email", nullable = false, length = 255, unique = true)
     private String email;
 
     @Column(name = "password", nullable = false, length = 255)
-    private String password;
+    private String passwordHash;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;

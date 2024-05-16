@@ -1,4 +1,4 @@
-package com.ticketing.solution.domain.pay;
+package com.ticketing.solution.domain.payment;
 
 import com.ticketing.solution.domain.member.Member;
 import com.ticketing.solution.domain.reservation.Reservation;
@@ -11,12 +11,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "pay")
-public class Pay {
+@Table(name = "payment")
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;

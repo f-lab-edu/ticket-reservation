@@ -17,8 +17,9 @@ import java.time.LocalDateTime;
 @Table(name = "show_round")
 public class Show {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "event_date", nullable = false)
     private LocalDate eventDate;

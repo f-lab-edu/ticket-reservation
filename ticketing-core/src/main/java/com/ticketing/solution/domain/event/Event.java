@@ -3,9 +3,14 @@ package com.ticketing.solution.domain.event;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,8 +18,9 @@ import java.time.LocalDateTime;
 @Table(name = "event")
 public class Event {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "event_type", nullable = false)
@@ -35,9 +41,9 @@ public class Event {
     @Column(name = "ticketing_date", nullable = false)
     private LocalDate ticketingDate;
 
-    @Column(name = "created_date", nullable = false)
+    @CreatedDate
     private LocalDateTime createdDate;
 
-    @Column(name = "modified_date", nullable = false)
+    @LastModifiedDate
     private LocalDateTime modifiedDate;
 }
