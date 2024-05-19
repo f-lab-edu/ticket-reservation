@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Getter
-@Setter
 @Entity
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)

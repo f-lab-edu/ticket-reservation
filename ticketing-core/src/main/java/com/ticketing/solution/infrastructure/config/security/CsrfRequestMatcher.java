@@ -12,14 +12,15 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CsrfRequestMatcher {
     private final Map<String, List<String>> csrfIgnoredPaths = new HashMap<>() {{
-        put("/members", List.of("POST"));
-        put("/login", List.of("POST"));
+        put("/api/v1/public", List.of("GET", "POST", "PUT", "DELETE"));
     }};
 
     public boolean isIgnoredRequest(HttpServletRequest request) {
         String path = request.getRequestURI();
         String method = request.getMethod().toUpperCase();
-        return csrfIgnoredPaths.containsKey(path) && csrfIgnoredPaths.get(path).contains(method);
+
+        return csrfIgnoredPaths.entrySet().stream()
+                .anyMatch(entry -> path.contains(entry.getKey()) && entry.getValue().contains(method));
     }
 
 }

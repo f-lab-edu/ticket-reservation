@@ -5,12 +5,19 @@ spring:
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+
   mvc:
     path match:
       matching-strategy: ant_path_matcher
 
   session:
     store-type: redis
+
+  data:
+    redis:
+      host: 127.0.0.1
+      password: 1234
+      port: 6379
 
   jpa:
     hibernate:
@@ -27,8 +34,7 @@ spring:
     level:
       org.hibernate.SQL: debug
 
-  data:
-    redis:
-      host: 127.0.0.1
-      password: 1234
-      port: 6379
+
+cors:
+  allow:
+    origins: http://localhost:8080

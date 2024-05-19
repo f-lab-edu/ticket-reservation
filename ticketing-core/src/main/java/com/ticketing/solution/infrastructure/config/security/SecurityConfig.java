@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizationConfig::configureAuthorization)
                 .cors(cors -> cors.configurationSource(corsConfig.corsConfigurationSource()))
                 .sessionManagement(sessionManagement -> sessionManagement.sessionFixation().none())
-                .addFilterAt(new SessionAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAt(new LoginAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout.deleteCookies("SESSION").logoutSuccessUrl("/"))
                 .build();
     }

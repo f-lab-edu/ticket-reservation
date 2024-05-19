@@ -10,22 +10,28 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.context.DelegatingSecurityContextRepository;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
+import org.springframework.security.web.context.SecurityContextRepository;
 
 
-public class SessionAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private static final String USERNAME_PARAMETER = "email";
     private static final String PASSWORD_PARAMETER = "password";
+    private static final String LOGIN_URL = "/api/v1/public/login";
 
     private final AuthenticationManager authenticationManager;
 
-    public SessionAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public LoginAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-        this.setSecurityContextRepository(
-                new DelegatingSecurityContextRepository(
-                        new RequestAttributeSecurityContextRepository(),
-                        new HttpSessionSecurityContextRepository()
-                ));
+        this.setFilterProcessesUrl(LOGIN_URL);
+        this.setSecurityContextRepository(createSecurityContextRepository());
+    }
+
+    private SecurityContextRepository createSecurityContextRepository() {
+        return new DelegatingSecurityContextRepository(
+                new RequestAttributeSecurityContextRepository(),
+                new HttpSessionSecurityContextRepository()
+        );
     }
 
     @Override
@@ -34,9 +40,12 @@ public class SessionAuthenticationFilter extends UsernamePasswordAuthenticationF
         return authenticationManager.authenticate(authenticationToken);
     }
 
+
     private UsernamePasswordAuthenticationToken createAuthenticationToken(HttpServletRequest request) {
         String username = request.getParameter(USERNAME_PARAMETER);
         String password = request.getParameter(PASSWORD_PARAMETER);
         return new UsernamePasswordAuthenticationToken(username, password);
     }
+
+
 }
