@@ -11,32 +11,32 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/api/v1")
 public class MemberController {
     private final MemberService memberService;
     private final MemberMapper memberMapper;
 
-    @GetMapping
+    @GetMapping("/member")
     public ResponseEntity<MemberResponseDto> getMember(@AuthenticationPrincipal UserDetails userDetails) {
         MemberResponseDto response = memberMapper.mapToMemberResponse(memberService.getMember(userDetails.getUsername()));
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping
+    @PostMapping("/public/member")
     public ResponseEntity<MemberResponseDto> addMember(@Valid @RequestBody MemberSignInRequestDto memberSignInRequestDto) {
         Member member = memberService.signUp(memberMapper.mapToMember(memberSignInRequestDto));
         MemberResponseDto response = memberMapper.mapToMemberResponse(member);
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping
+    @PutMapping("/member")
     public ResponseEntity<Void> updateMember(@Valid @RequestBody MemberUpdateInfoRequestDto memberUpdateInfoRequestDto,
                                              @AuthenticationPrincipal UserDetails userDetails) {
         memberService.updateMember(memberMapper.mapToMember(memberUpdateInfoRequestDto), userDetails.getUsername());
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/member")
     public ResponseEntity<Void> removeMember(@AuthenticationPrincipal UserDetails userDetails) {
         memberService.withdraw(userDetails.getUsername());
         return ResponseEntity.ok().build();
