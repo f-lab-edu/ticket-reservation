@@ -1,15 +1,17 @@
 package com.ticketing.solution.domain.seat;
 
-import java.time.LocalDateTime;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import com.ticketing.solution.domain.hall.Hall;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 
 @Entity
 @Table(name = "seat")
+@EntityListeners(AuditingEntityListener.class)
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
