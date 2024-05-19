@@ -3,7 +3,6 @@ package com.ticketing.solution.domain.member;
 import com.ticketing.solution.infrastructure.exception.EmailDuplicateException;
 import com.ticketing.solution.infrastructure.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
-    private final PasswordEncoder passwordEncoder;
-
 
     @Override
     @Transactional
@@ -20,7 +17,6 @@ public class MemberServiceImpl implements MemberService{
         if (memberRepository.existByEmail(member.getEmail())) {
             throw new EmailDuplicateException();
         }
-        member.encodePassword(passwordEncoder);
         return memberRepository.addMember(member);
     }
 
