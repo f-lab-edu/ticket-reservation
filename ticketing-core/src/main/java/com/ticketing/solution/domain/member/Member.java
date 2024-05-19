@@ -1,18 +1,27 @@
 package com.ticketing.solution.domain.member;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
+@DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "member")
-public class Member {
+public class Member implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -35,6 +44,7 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
+    @ColumnDefault("'USER'")
     private MemberType type;
 
     @CreatedDate
@@ -42,4 +52,14 @@ public class Member {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    public void update(Member member) {
+        this.name = member.getName();
+        this.phone = member.getPhone();
+        this.address = member.getAddress();
+    }
+
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        this.passwordHash = passwordEncoder.encode(this.passwordHash);
+    }
 }
