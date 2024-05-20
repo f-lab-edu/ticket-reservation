@@ -18,7 +18,7 @@ public class CorsConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(corsAllowOrigins.split(",")));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuration.addExposedHeader("SESSIONIDD");
+        configuration.addExposedHeader("SESSIONID");
         configuration.setAllowedHeaders(Arrays.asList("X-CSRF-TOKEN", "Content-Type"));
         configuration.setAllowCredentials(true);
 

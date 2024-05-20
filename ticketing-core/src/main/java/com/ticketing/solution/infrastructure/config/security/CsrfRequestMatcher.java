@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@RequiredArgsConstructor
 public class CsrfRequestMatcher {
-    private final Map<String, List<String>> csrfIgnoredPaths = new HashMap<>() {{
-        put("/api/v1/public", List.of("GET", "POST", "PUT", "DELETE"));
-    }};
+
+    private final Map<String, List<String>> csrfIgnoredPaths = new HashMap<>();
+
+    CsrfRequestMatcher() {
+        csrfIgnoredPaths.put("/api/v1/public", List.of("GET", "POST", "PUT", "DELETE"));
+    }
 
     public boolean isIgnoredRequest(HttpServletRequest request) {
         String path = request.getRequestURI();

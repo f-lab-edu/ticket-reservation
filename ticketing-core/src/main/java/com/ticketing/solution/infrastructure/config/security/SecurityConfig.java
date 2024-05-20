@@ -37,7 +37,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.ignoringRequestMatchers(csrfRequestMatcher::isIgnoredRequest))
                 .authorizeHttpRequests(authorizationConfig::configureAuthorization)
                 .cors(cors -> cors.configurationSource(corsConfig.corsConfigurationSource()))
-                .sessionManagement(sessionManagement -> sessionManagement.sessionFixation().none())
+                .sessionManagement(sessionManagement -> sessionManagement
+                    .sessionFixation().migrateSession()
+                    .maximumSessions(1)
+                    .maxSessionsPreventsLogin(false))
                 .addFilterAt(new LoginAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout.deleteCookies("SESSION").logoutSuccessUrl("/"))
                 .build();
