@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
 @Builder
-public record MemberUpdateInfoRequestDto(
+public record MemberUpdateInfoRequest(
 
         @NotBlank(message = "이름은 필수 입력 값입니다")
         @Size(min = 2, max = 50, message = "이름은 2자 이상 50자 이하이어야 합니다")

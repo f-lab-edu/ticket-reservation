@@ -17,22 +17,22 @@ public class MemberController {
     private final MemberMapper memberMapper;
 
     @GetMapping("/member")
-    public ResponseEntity<MemberResponseDto> getMember(@AuthenticationPrincipal UserDetails userDetails) {
-        MemberResponseDto response = memberMapper.mapToMemberResponse(memberService.getMember(userDetails.getUsername()));
+    public ResponseEntity<MemberResponse> getMember(@AuthenticationPrincipal UserDetails userDetails) {
+        MemberResponse response = memberMapper.mapToMemberResponse(memberService.getMember(userDetails.getUsername()));
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/public/member")
-    public ResponseEntity<MemberResponseDto> addMember(@Valid @RequestBody MemberSignInRequestDto memberSignInRequestDto) {
-        Member member = memberService.signUp(memberMapper.mapToMember(memberSignInRequestDto));
-        MemberResponseDto response = memberMapper.mapToMemberResponse(member);
+    public ResponseEntity<MemberResponse> addMember(@Valid @RequestBody MemberSignInRequest memberSignInRequest) {
+        Member member = memberService.signUp(memberMapper.mapToMember(memberSignInRequest));
+        MemberResponse response = memberMapper.mapToMemberResponse(member);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/member")
-    public ResponseEntity<Void> updateMember(@Valid @RequestBody MemberUpdateInfoRequestDto memberUpdateInfoRequestDto,
+    public ResponseEntity<Void> updateMember(@Valid @RequestBody MemberUpdateInfoRequest memberUpdateInfoRequest,
                                              @AuthenticationPrincipal UserDetails userDetails) {
-        memberService.updateMember(memberMapper.mapToMember(memberUpdateInfoRequestDto), userDetails.getUsername());
+        memberService.updateMember(memberMapper.mapToMember(memberUpdateInfoRequest), userDetails.getUsername());
         return ResponseEntity.ok().build();
     }
 
