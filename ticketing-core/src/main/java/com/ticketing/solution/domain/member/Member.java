@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Getter
-@Setter
 @Entity
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
@@ -57,9 +56,5 @@ public class Member implements Serializable {
         this.name = member.getName();
         this.phone = member.getPhone();
         this.address = member.getAddress();
-    }
-
-    public void encodePassword(PasswordEncoder passwordEncoder) {
-        this.passwordHash = passwordEncoder.encode(this.passwordHash);
     }
 }
