@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -41,6 +42,7 @@ public class SecurityConfig {
                     .sessionFixation().migrateSession()
                     .maximumSessions(1)
                     .maxSessionsPreventsLogin(false))
+                .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
                 .addFilterAt(new LoginAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout.deleteCookies("SESSION").logoutSuccessUrl("/"))
                 .build();

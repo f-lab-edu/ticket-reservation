@@ -2,6 +2,8 @@ package com.ticketing.solution.domain.event;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -15,6 +17,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
+@Getter
 @Table(name = "event")
 @EntityListeners(AuditingEntityListener.class)
 public class Event {
@@ -47,4 +51,13 @@ public class Event {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    public void update(Event event) {
+        this.eventType = event.getEventType();
+        this.eventName = event.getEventName();
+        this.description = event.getDescription();
+        this.startDate = event.getStartDate();
+        this.endDate = event.getEndDate();
+        this.ticketingDate = event.getTicketingDate();
+    }
 }
