@@ -20,8 +20,6 @@ public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
 
-    private final CsrfRequestMatcher csrfRequestMatcher;
-
     private final CorsConfig corsConfig;
 
     private final AuthorizationConfig authorizationConfig;
@@ -35,7 +33,6 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .formLogin(AbstractHttpConfigurer::disable)
-                .csrf(csrf -> csrf.ignoringRequestMatchers(csrfRequestMatcher::isIgnoredRequest))
                 .authorizeHttpRequests(authorizationConfig::configureAuthorization)
                 .cors(cors -> cors.configurationSource(corsConfig.corsConfigurationSource()))
                 .sessionManagement(sessionManagement -> sessionManagement
