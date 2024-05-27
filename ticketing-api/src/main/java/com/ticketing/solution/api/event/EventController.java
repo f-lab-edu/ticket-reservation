@@ -25,27 +25,27 @@ public class EventController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/public/event/{eventId}")
+    @GetMapping("/public/events/{eventId}")
     public ResponseEntity<EventResponse> getEvent(@PathVariable Long eventId) {
         Event event = eventService.getEvent(eventId);
         EventResponse response = eventMapper.mapToEventResponse(event);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/event")
+    @PostMapping("/events")
     public ResponseEntity<EventResponse> addEvent(@Valid @RequestBody EventRequest eventRequest) {
         eventService.addEvent(eventMapper.mapToEvent(eventRequest));
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/event/{eventId}")
+    @PutMapping("/events/{eventId}")
     public ResponseEntity<Void> updateEvent(@PathVariable Long eventId,
                                             @Valid @RequestBody EventRequest eventRequest) {
         eventService.updateEvent(eventId, eventMapper.mapToEvent(eventRequest));
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/event/{eventId}")
+    @DeleteMapping("/events/{eventId}")
     public ResponseEntity<Void> removeEvent(@PathVariable Long eventId) {
         eventService.deleteEvent(eventId);
         return ResponseEntity.ok().build();
