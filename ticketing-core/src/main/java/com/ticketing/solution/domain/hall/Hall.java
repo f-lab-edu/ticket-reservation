@@ -36,7 +36,7 @@ public class Hall {
     @Column(name = "capacity", nullable = false)
     private int capacity;
 
-    @Column(name = "seat_image", length = 255)
+    @Column(name = "seat_image", length = 2048)
     private String seatImage;  // Image link
 
     @CreatedDate
