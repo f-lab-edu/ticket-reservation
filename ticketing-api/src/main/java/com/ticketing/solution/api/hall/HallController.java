@@ -14,26 +14,26 @@ public class HallController {
     private final HallService hallService;
     private final HallMapper hallMapper;
 
-    @GetMapping("/public/hall/{hallId}")
+    @GetMapping("/public/halls/{hallId}")
     public ResponseEntity<HallResponse> getHall(@PathVariable Long hallId) {
         Hall hall = hallService.getHall(hallId);
         HallResponse response = hallMapper.mapToHallResponse(hall);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/hall")
+    @PostMapping("/halls")
     public ResponseEntity<HallResponse> addHall(HallRequest hallRequest) {
         hallService.addHall(hallMapper.mapToHall(hallRequest));
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/hall/{hallId}")
+    @PutMapping("/halls/{hallId}")
     public ResponseEntity<HallResponse> updateHall(@PathVariable Long hallId, HallRequest hallRequest) {
         hallService.updateHall(hallId, hallMapper.mapToHall(hallRequest));
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/hall/{hallId}")
+    @DeleteMapping("/halls/{hallId}")
     public ResponseEntity<HallResponse> removeHall(@PathVariable Long hallId) {
         hallService.deleteHall(hallId);
         return ResponseEntity.ok().build();
