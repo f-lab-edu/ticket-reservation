@@ -1,4 +1,4 @@
-package com.ticketing.solution.adapter.exception;
+package com.ticketing.solution.application.exception;
 
 public class EmailDuplicateException extends CustomException {
     public EmailDuplicateException() {

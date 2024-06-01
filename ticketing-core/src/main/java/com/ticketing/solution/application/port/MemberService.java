@@ -1,13 +1,14 @@
 package com.ticketing.solution.application.port;
 
-import com.ticketing.solution.application.port.in.MemberUseCasePort;
-import com.ticketing.solution.domain.member.Member;
-import com.ticketing.solution.application.port.out.MemberOperationPort;
-import com.ticketing.solution.adapter.exception.EmailDuplicateException;
-import com.ticketing.solution.adapter.exception.MemberNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import com.ticketing.solution.application.exception.EmailDuplicateException;
+import com.ticketing.solution.application.exception.MemberNotFoundException;
+import com.ticketing.solution.application.port.in.MemberUseCasePort;
+import com.ticketing.solution.application.port.out.MemberOperationPort;
+import com.ticketing.solution.domain.member.Member;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service

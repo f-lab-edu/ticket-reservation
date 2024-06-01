@@ -1,4 +1,4 @@
-package com.ticketing.solution.adapter.exception;
+package com.ticketing.solution.application.exception;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

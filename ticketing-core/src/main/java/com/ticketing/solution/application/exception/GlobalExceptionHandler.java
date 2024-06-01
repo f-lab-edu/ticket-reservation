@@ -1,4 +1,4 @@
-package com.ticketing.solution.adapter.exception;
+package com.ticketing.solution.application.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
