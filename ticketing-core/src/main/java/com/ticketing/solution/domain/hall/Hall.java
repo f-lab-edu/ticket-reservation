@@ -2,6 +2,8 @@ package com.ticketing.solution.domain.hall;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,6 +14,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
+@Getter
 @Table(name = "hall")
 @EntityListeners(AuditingEntityListener.class)
 public class Hall {
@@ -32,7 +36,7 @@ public class Hall {
     @Column(name = "capacity", nullable = false)
     private int capacity;
 
-    @Column(name = "seat_image", length = 255)
+    @Column(name = "seat_image", length = 2048)
     private String seatImage;  // Image link
 
     @CreatedDate
@@ -41,4 +45,11 @@ public class Hall {
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
+    public void update(Hall hall) {
+        this.name = hall.getName();
+        this.address = hall.getAddress();
+        this.number = hall.getNumber();
+        this.capacity = hall.getCapacity();
+        this.seatImage = hall.getSeatImage();
+    }
 }
