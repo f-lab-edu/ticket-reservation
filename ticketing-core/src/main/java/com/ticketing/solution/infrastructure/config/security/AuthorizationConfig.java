@@ -10,6 +10,9 @@ public class AuthorizationConfig {
     public void configureAuthorization(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authorizeRequests) {
         authorizeRequests
                 .requestMatchers("/api/v1/public/*").permitAll()
-                .anyRequest().authenticated();
+                .requestMatchers("/api/v1/members/*").hasAnyAuthority("USER", "ORGANIZER", "ADMIN")
+                .requestMatchers("/api/v1/events/*").hasAnyAuthority("ORGANIZER", "ADMIN")
+                .requestMatchers("/api/v1/halls/*").hasAuthority("ADMIN")
+                .anyRequest().hasAuthority("ADMIN");
     }
 }

@@ -1,5 +1,5 @@
 package com.ticketing.solution.domain.event;
 
 public enum EventType {
-    FIXED, FLEXIBLE
+    CONCERT, SPORT, FESTIVAL, MUSICAL
 }

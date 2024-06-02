@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -18,8 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
-
-    private final CsrfRequestMatcher csrfRequestMatcher;
 
     private final CorsConfig corsConfig;
 
@@ -34,13 +33,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .formLogin(AbstractHttpConfigurer::disable)
-                .csrf(csrf -> csrf.ignoringRequestMatchers(csrfRequestMatcher::isIgnoredRequest))
                 .authorizeHttpRequests(authorizationConfig::configureAuthorization)
                 .cors(cors -> cors.configurationSource(corsConfig.corsConfigurationSource()))
                 .sessionManagement(sessionManagement -> sessionManagement
                     .sessionFixation().migrateSession()
                     .maximumSessions(1)
                     .maxSessionsPreventsLogin(false))
+                .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
                 .addFilterAt(new LoginAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout.deleteCookies("SESSION").logoutSuccessUrl("/"))
                 .build();
