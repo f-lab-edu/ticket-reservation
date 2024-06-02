@@ -1,9 +1,11 @@
 package com.ticketing.solution.domain.reservation;
 
 import com.ticketing.solution.domain.member.Member;
+import com.ticketing.solution.domain.payment.Payment;
 import com.ticketing.solution.domain.seat.Seat;
 import com.ticketing.solution.domain.show.Show;
 import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -11,6 +13,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "reservation")
 @EntityListeners(AuditingEntityListener.class)
 public class Reservation {
@@ -19,11 +26,8 @@ public class Reservation {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "reservation_date", nullable = false)
-    private LocalDateTime reservationDate;
-
-    @Column(name = "reservation_complete", nullable = false)
-    private boolean reservationComplete;
+    @Column(name = "status", nullable = false)
+    private ReservationStatus status;
 
     @CreatedDate
     private LocalDateTime createdDate;
@@ -36,11 +40,15 @@ public class Reservation {
     private Show show;
 
     @ManyToOne
-    @JoinColumn(name = "seat_id", nullable = false)
+    @JoinColumn(name = "seat_id")
     private Seat seat;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 
 }
