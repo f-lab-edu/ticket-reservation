@@ -3,8 +3,7 @@ package com.ticketing.solution.domain.show;
 import com.ticketing.solution.domain.event.Event;
 import com.ticketing.solution.domain.hall.Hall;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -15,6 +14,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
+@Getter
+@Setter
 @Table(name = "show_round")
 @EntityListeners(AuditingEntityListener.class)
 public class Show {
@@ -48,4 +50,13 @@ public class Show {
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
+
+    public void update(Show mapToShow, Event event, Hall hall) {
+        this.eventDate = mapToShow.getEventDate();
+        this.maxOccupancy = mapToShow.getMaxOccupancy();
+        this.playTime = mapToShow.getPlayTime();
+        this.location = mapToShow.getLocation();
+        this.event = event;
+        this.hall = hall;
+    }
 }
