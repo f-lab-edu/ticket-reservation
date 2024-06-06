@@ -16,8 +16,6 @@ public class PaymentMapper {
                 .dueDate(payment.getDueDate())
                 .paymentDate(payment.getPaymentDate())
                 .cancelDate(payment.getCancelDate())
-                .createdDate(payment.getCreatedDate())
-                .modifiedDate(payment.getModifiedDate())
                 .build();
     }
 

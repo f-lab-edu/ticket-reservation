@@ -4,7 +4,6 @@ import com.ticketing.solution.domain.payment.PaymentMethod;
 import lombok.Builder;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Builder
@@ -15,8 +14,6 @@ public record PaymentResponse(
         boolean approved,
         Date dueDate,
         Date paymentDate,
-        Date cancelDate,
-        LocalDateTime createdDate,
-        LocalDateTime modifiedDate
+        Date cancelDate
 ) {
 }
