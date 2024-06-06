@@ -10,9 +10,9 @@ import com.ticketing.solution.domain.reservation.ReservationService;
 import com.ticketing.solution.infrastructure.config.security.UserDetailsImpl;
 import com.ticketing.solution.infrastructure.exception.PaymentVerificationException;
 import com.ticketing.solution.infrastructure.portOne.PortOneClient;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -27,6 +27,12 @@ public class PaymentFacadeImpl implements PaymentFacade {
     private final ReservationService reservationService;
 
     private final PortOneClient portOneClient;
+
+    @Override
+    @Transactional(readOnly = true)
+    public Payment getPayment(Long paymentId) {
+        return paymentService.getPayment(paymentId);
+    }
 
     @Override
     @Transactional

@@ -1,7 +1,6 @@
 package com.ticketing.solution.api.pay;
 
 import com.ticketing.solution.application.PaymentFacade;
-import com.ticketing.solution.domain.payment.PaymentService;
 import com.ticketing.solution.infrastructure.config.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class PaymentController {
 
-    private final PaymentService paymentService;
-
     private final PaymentFacade paymentFacade;
     private final PaymentMapper paymentMapper;
 
     @PostMapping("/payments/pre-process")
     public ResponseEntity<Void> prePaymentProcess(@RequestBody PaymentPreRequest paymentRequest, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        paymentFacade.prePaymentProcess(paymentRequest.merchant_uid(), paymentRequest.showId(), paymentRequest.amount(), userDetails);
+        paymentFacade.prePaymentProcess(paymentRequest.merchantUid(), paymentRequest.showId(), paymentRequest.amount(), userDetails);
         return ResponseEntity.ok().build();
     }
 
@@ -32,6 +29,6 @@ public class PaymentController {
 
     @GetMapping("/payments/{paymentId}")
     public ResponseEntity<PaymentResponse> getPayment(@PathVariable Long paymentId) {
-        return ResponseEntity.ok(paymentMapper.mapToPaymentResponse(paymentService.getPayment(paymentId)));
+        return ResponseEntity.ok(paymentMapper.mapToPaymentResponse(paymentFacade.getPayment(paymentId)));
     }
 }
