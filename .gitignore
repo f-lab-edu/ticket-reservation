@@ -35,3 +35,7 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+node_modules/
+package.json
+package-lock.json
+ticketing-core/src/main/resources/static/index.html
