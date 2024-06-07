@@ -4,7 +4,7 @@ dependencies {
     implementation 'org.springframework.session:spring-session-data-redis'
     testImplementation 'org.springframework.security:spring-security-test'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
+    implementation 'com.github.iamport:iamport-rest-client-java:0.2.23'
 }
 
 processResources {
