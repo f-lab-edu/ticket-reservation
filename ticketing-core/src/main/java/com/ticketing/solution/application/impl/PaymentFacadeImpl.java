@@ -23,8 +23,6 @@ public class PaymentFacadeImpl implements PaymentFacade {
 
     private final ReservationFacade reservationFacade;
 
-    private final ReservationService reservationService;
-
     private final PortOneService portOneService;
 
     @Override
@@ -70,7 +68,7 @@ public class PaymentFacadeImpl implements PaymentFacade {
     }
 
     private void approveReservation(Payment payment) {
-        Reservation reservation = reservationService.getReservationByPayment(payment);
-        reservationService.approveReservation(reservation);
+        Reservation reservation = reservationFacade.getReservationByPayment(payment);
+        reservationFacade.approveReservation(reservation);
     }
 }
