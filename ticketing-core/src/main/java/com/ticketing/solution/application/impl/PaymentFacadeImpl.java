@@ -3,13 +3,12 @@ package com.ticketing.solution.application.impl;
 import com.ticketing.solution.application.PaymentFacade;
 import com.ticketing.solution.application.ReservationFacade;
 import com.ticketing.solution.domain.payment.Payment;
-import com.ticketing.solution.domain.payment.PaymentMethod;
 import com.ticketing.solution.domain.payment.PaymentService;
 import com.ticketing.solution.domain.reservation.Reservation;
 import com.ticketing.solution.domain.reservation.ReservationService;
 import com.ticketing.solution.infrastructure.config.security.UserDetailsImpl;
 import com.ticketing.solution.infrastructure.exception.PaymentVerificationException;
-import com.ticketing.solution.infrastructure.portOne.PortOneClient;
+import com.ticketing.solution.infrastructure.thirdPartyPayment.portOne.PortOneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +25,7 @@ public class PaymentFacadeImpl implements PaymentFacade {
 
     private final ReservationService reservationService;
 
-    private final PortOneClient portOneClient;
+    private final PortOneService portOneService;
 
     @Override
     @Transactional(readOnly = true)
@@ -51,25 +50,23 @@ public class PaymentFacadeImpl implements PaymentFacade {
     @Override
     @Transactional
     public void postPaymentProcess(String impUid){
-        com.siot.IamportRestClient.response.Payment portOnePaymentInfo = portOneClient.getPaymentInfo(impUid);
+        Payment portOnePaymentInfo = portOneService.getPaymentInfo(impUid);
         Payment prePaymentInfo = paymentService.getPaymentByMerchantUid(portOnePaymentInfo.getMerchantUid());
         verifyPayment(prePaymentInfo, portOnePaymentInfo);
         approvePayment(prePaymentInfo, portOnePaymentInfo);
         approveReservation(prePaymentInfo);
     }
 
-    private void verifyPayment(Payment prePaymentInfo, com.siot.IamportRestClient.response.Payment paymentInfo) {
+    private void verifyPayment(Payment prePaymentInfo, Payment paymentInfo) {
         boolean isInvalidAmount = paymentInfo.getAmount().equals(prePaymentInfo.getAmount());
         if (isInvalidAmount) {
-            portOneClient.cancelPayment(paymentInfo.getImpUid());
+            portOneService.cancelPayment(paymentInfo.getImpUid());
             throw new PaymentVerificationException();
         }
     }
 
-    private void approvePayment(Payment payment, com.siot.IamportRestClient.response.Payment paymentInfo) {
+    private void approvePayment(Payment payment, Payment paymentInfo) {
         payment.setApproved(true);
-        payment.setMethod(PaymentMethod.valueOf(paymentInfo.getPayMethod()));
-        payment.setPaymentDate(paymentInfo.getPaidAt());
     }
 
     private void approveReservation(Payment payment) {

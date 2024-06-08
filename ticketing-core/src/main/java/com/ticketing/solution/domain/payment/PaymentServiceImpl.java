@@ -1,6 +1,6 @@
 package com.ticketing.solution.domain.payment;
 
-import com.ticketing.solution.infrastructure.portOne.PortOneClient;
+import com.ticketing.solution.infrastructure.thirdPartyPayment.ThirdPartyPaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,7 +16,7 @@ import java.util.Date;
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
 
-    private final PortOneClient portOneClient;
+    private final ThirdPartyPaymentService thirdPartyClientService;
 
     @Override
     @Transactional
@@ -41,7 +41,7 @@ public class PaymentServiceImpl implements PaymentService {
     @PreAuthorize("#payment.member.email == authentication.name")
     @Transactional
     public void cancelPayment(Payment payment) {
-        portOneClient.cancelPayment(payment.getImpUid());
+        thirdPartyClientService.cancelPayment(payment.getImpUid());
         payment.setCancelDate(Date.from(Instant.from(LocalDate.now())));
     }
 
