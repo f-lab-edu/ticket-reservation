@@ -15,6 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @Repository
 public class ReservationRepositoryImpl implements ReservationRepository {
+
+    private static final int MAX_PAGE_SIZE = 16;
+
     private final ReservationJpaRepository reservationJpaRepository;
 
     @Override
@@ -29,7 +32,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 
     @Override
     public List<Reservation> findByMember(int page, Member member) {
-        PageRequest pageRequest = PageRequest.of(page - 1, 16, Sort.by(Sort.Direction.DESC, "id"));
+        PageRequest pageRequest = PageRequest.of(page - 1, MAX_PAGE_SIZE, Sort.by(Sort.Direction.DESC, "id"));
         return reservationJpaRepository.findByMember(pageRequest, member);
     }
 
