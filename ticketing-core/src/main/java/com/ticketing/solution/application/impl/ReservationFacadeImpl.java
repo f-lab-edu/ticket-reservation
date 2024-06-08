@@ -42,4 +42,14 @@ public class ReservationFacadeImpl implements ReservationFacade {
         reservation.setStatus(ReservationStatus.CANCELED);
         paymentService.cancelPayment(reservation.getPayment());
     }
+
+    @Override
+    public Reservation getReservationByPayment(Payment payment) {
+        return reservationService.getReservationByPayment(payment);
+    }
+
+    @Override
+    public void approveReservation(Reservation reservation) {
+        reservationService.approveReservation(reservation);
+    }
 }

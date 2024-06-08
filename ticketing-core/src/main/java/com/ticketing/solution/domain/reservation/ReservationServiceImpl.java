@@ -33,6 +33,7 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Reservation getReservationByPayment(Payment payment) {
         return reservationRepository.findByPayment(payment);
     }
