@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/ticketing
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_SESSION_STORE_TYPE: redis
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PASSWORD: 1234
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+      SPRING_JPA_HIBERNATE_NAMING_PHYSICAL_STRATEGY: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+      SPRING_LOGGING_LEVEL_ORG_HIBERNATE_SQL: debug
+      PORTONE_API_KEY: PORTONE_API_KEY
+      PORTONE_API_SECRET: PORTONE_API_SECRET
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: ticketing
+    volumes:
+      - db-data:/var/lib/mysql
+
+  redis:
+    image: redis:6.2
+    ports:
+      - "6379:6379"
+    environment:
+      REDIS_PASSWORD: 1234
+    command: ["redis-server", "--requirepass", "1234"]
+    volumes:
+      - redis-data:/data
+
+volumes:
+  db-data:
+  redis-data:
