@@ -4,6 +4,7 @@ import com.ticketing.solution.application.PaymentFacade;
 import com.ticketing.solution.application.ReservationFacade;
 import com.ticketing.solution.domain.payment.Payment;
 import com.ticketing.solution.domain.payment.PaymentService;
+import com.ticketing.solution.domain.payment.ProcessPrePaymentCommand;
 import com.ticketing.solution.domain.reservation.Reservation;
 import com.ticketing.solution.domain.reservation.ReservationService;
 import com.ticketing.solution.infrastructure.config.security.UserDetailsImpl;
@@ -33,11 +34,11 @@ public class PaymentFacadeImpl implements PaymentFacade {
 
     @Override
     @Transactional
-    public void prePaymentProcess(String merchantUid, Long showId, BigDecimal amount, UserDetailsImpl userDetails) {
+    public void prePaymentProcess(ProcessPrePaymentCommand command, UserDetailsImpl userDetails) {
         Payment payment = Payment.builder()
                 .approved(false)
-                .merchantUid(merchantUid)
-                .amount(amount)
+                .merchantUid(command.merchantUid())
+                .amount(command.amount())
                 .member(userDetails.getMember())
                 .build();
 

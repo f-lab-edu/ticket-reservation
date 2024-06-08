@@ -1,6 +1,7 @@
 package com.ticketing.solution.api.pay;
 
 import com.ticketing.solution.application.PaymentFacade;
+import com.ticketing.solution.domain.payment.ProcessPrePaymentCommand;
 import com.ticketing.solution.infrastructure.config.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,8 @@ public class PaymentController {
 
     @PostMapping("/payments/pre-process")
     public ResponseEntity<Void> prePaymentProcess(@RequestBody PaymentPreRequest paymentRequest, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        paymentFacade.prePaymentProcess(paymentRequest.merchantUid(), paymentRequest.showId(), paymentRequest.amount(), userDetails);
+        ProcessPrePaymentCommand command = paymentMapper.mapToProcessPrePaymentCommand(paymentRequest);
+        paymentFacade.prePaymentProcess(command, userDetails);
         return ResponseEntity.ok().build();
     }
 
