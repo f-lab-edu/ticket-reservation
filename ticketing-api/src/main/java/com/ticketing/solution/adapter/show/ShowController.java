@@ -1,6 +1,5 @@
 package com.ticketing.solution.adapter.show;
 
-import com.ticketing.solution.application.port.in.ShowFacade;
 import com.ticketing.solution.application.port.in.ShowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,6 @@ import java.util.List;
 public class ShowController {
 
     private final ShowService showService;
-
-    private final ShowFacade showFacade;
 
     private final ShowWebMapper showWebMapper;
 
@@ -31,13 +28,13 @@ public class ShowController {
 
     @PostMapping("/shows")
     public ResponseEntity<Void> addShow(ShowRequest showRequest) {
-        showFacade.addShow(showWebMapper.mapToShow(showRequest), showRequest.eventId(), showRequest.hallId());
+        showService.addShow(showWebMapper.mapToShow(showRequest), showRequest.eventId(), showRequest.hallId());
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/shows/{showId}")
     public ResponseEntity<Void> updateShow(@PathVariable Long showId, ShowRequest showRequest) {
-        showFacade.updateShow(showId, showWebMapper.mapToShow(showRequest), showRequest.eventId(), showRequest.hallId());
+        showService.updateShow(showId, showWebMapper.mapToShow(showRequest), showRequest.eventId(), showRequest.hallId());
         return ResponseEntity.ok().build();
     }
 

@@ -11,4 +11,8 @@ public interface ShowService {
     void deleteShow(Long showId);
 
     void addShow(Show show);
+
+    void updateShow(Long showId, Show show, Long eventId, Long hallId);
+
+    void addShow(Show mapToShow, Long eventId, Long hallId);
 }

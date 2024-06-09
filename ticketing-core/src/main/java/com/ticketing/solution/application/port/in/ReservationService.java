@@ -17,4 +17,8 @@ public interface ReservationService {
     Reservation getReservationByPayment(Payment payment);
 
     void approveReservation(Reservation reservation);
+
+    void createReservation(Payment payment, Long showId, Member member);
+
+    void cancelReservation(Long reservationId);
 }

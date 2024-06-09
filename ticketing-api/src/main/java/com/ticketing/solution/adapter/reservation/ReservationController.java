@@ -1,6 +1,5 @@
 package com.ticketing.solution.adapter.reservation;
 
-import com.ticketing.solution.application.port.in.ReservationFacade;
 import com.ticketing.solution.application.port.in.ReservationService;
 import com.ticketing.solution.adapter.config.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +16,6 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
-    private final ReservationFacade reservationFacade;
-
     private final ReservationWebMapper reservationWebMapper;
 
     @GetMapping("/reservations")
@@ -33,7 +30,7 @@ public class ReservationController {
 
     @DeleteMapping("/reservations/{reservationId}")
     public ResponseEntity<Void> cancelReservation(@PathVariable Long reservationId) {
-        reservationFacade.cancelReservation(reservationId);
+        reservationService.cancelReservation(reservationId);
         return ResponseEntity.ok().build();
     }
 }
