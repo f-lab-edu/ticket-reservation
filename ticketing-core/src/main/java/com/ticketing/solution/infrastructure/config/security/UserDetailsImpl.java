@@ -21,6 +21,9 @@ public class UserDetailsImpl implements UserDetails, Serializable {
         return collections;
     }
 
+    public Member getMember() {
+        return member;
+    }
     @Override
     public String getPassword() {
         return member.getPasswordHash();
