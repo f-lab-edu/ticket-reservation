@@ -20,18 +20,9 @@ allprojects {
     }
 }
 
-subprojects {
-    apply plugin: "java-library"
-
-    dependencies {
-
-    }
-}
-
 java {
     sourceCompatibility = '17'
 }
-
 
 subprojects {
     apply plugin: "java-library"
@@ -51,6 +42,11 @@ subprojects {
         testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.0"
         testImplementation "org.springframework.boot:spring-boot-starter-test"
     }
+}
+
+
+tasks.bootJar {
+    enabled(false)
 }
 
 tasks.test {

@@ -34,6 +34,11 @@ spring:
     level:
       org.hibernate.SQL: debug
 
+portone:
+  api:
+    key: PORTONE_API_KEY
+    secret: PORTONE_API_SECRET
+
 
 cors:
   allow:

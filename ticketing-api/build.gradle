@@ -13,3 +13,10 @@ dependencies {
 processResources {
     from '../shared-resources'
 }
+
+bootJar {
+}
+
+jar {
+    enabled = false
+}
