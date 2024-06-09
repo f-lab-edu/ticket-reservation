@@ -1,0 +1,19 @@
+package com.ticketing.solution.application.port.in;
+
+import com.ticketing.solution.domain.member.Member;
+import com.ticketing.solution.domain.payment.Payment;
+import com.ticketing.solution.domain.payment.ProcessPrePaymentCommand;
+
+public interface PaymentOperationPort {
+    void save(Payment paymentResult);
+
+    Payment getPaymentById(Long paymentId);
+
+    Payment getPaymentByMerchantUid(String merchantUid);
+
+    void cancelPayment(Payment payment);
+
+    void postPaymentProcess(String impUid);
+
+    void prePaymentProcess(ProcessPrePaymentCommand command, Member member);
+}

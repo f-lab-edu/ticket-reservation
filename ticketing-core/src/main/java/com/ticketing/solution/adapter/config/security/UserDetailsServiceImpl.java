@@ -1,6 +1,6 @@
 package com.ticketing.solution.adapter.config.security;
 
-import com.ticketing.solution.application.port.out.MemberRepository;
+import com.ticketing.solution.application.port.out.persistence.MemberPersistencePort;
 import com.ticketing.solution.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-   private final MemberRepository memberRepository;
+   private final MemberPersistencePort memberPersistencePort;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Member member = memberRepository.getMemberByEmail(email);
+        Member member = memberPersistencePort.getMemberByEmail(email);
         return new UserDetailsImpl(member);
     }
 }

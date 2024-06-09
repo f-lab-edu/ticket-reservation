@@ -1,6 +1,6 @@
 package com.ticketing.solution.adapter.member;
 
-import com.ticketing.solution.application.port.in.MemberService;
+import com.ticketing.solution.application.port.in.MemberOperationPort;
 import com.ticketing.solution.domain.member.Member;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1")
 public class MemberController {
-    private final MemberService memberService;
+    private final MemberOperationPort memberOperationPort;
     private final MemberWebMapper memberWebMapper;
 
     @GetMapping("/member")
     public ResponseEntity<MemberResponse> getMember(@AuthenticationPrincipal UserDetails userDetails) {
-        MemberResponse response = memberWebMapper.mapToMemberResponse(memberService.getMember(userDetails.getUsername()));
+        MemberResponse response = memberWebMapper.mapToMemberResponse(memberOperationPort.getMember(userDetails.getUsername()));
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/public/member")
     public ResponseEntity<MemberResponse> addMember(@Valid @RequestBody MemberSignInRequest memberSignInRequest) {
-        Member member = memberService.signUp(memberWebMapper.mapToMember(memberSignInRequest));
+        Member member = memberOperationPort.signUp(memberWebMapper.mapToMember(memberSignInRequest));
         MemberResponse response = memberWebMapper.mapToMemberResponse(member);
         return ResponseEntity.ok(response);
     }
@@ -32,13 +32,13 @@ public class MemberController {
     @PutMapping("/member")
     public ResponseEntity<Void> updateMember(@Valid @RequestBody MemberUpdateInfoRequest memberUpdateInfoRequest,
                                              @AuthenticationPrincipal UserDetails userDetails) {
-        memberService.updateMember(memberWebMapper.mapToMember(memberUpdateInfoRequest), userDetails.getUsername());
+        memberOperationPort.updateMember(memberWebMapper.mapToMember(memberUpdateInfoRequest), userDetails.getUsername());
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/member")
     public ResponseEntity<Void> removeMember(@AuthenticationPrincipal UserDetails userDetails) {
-        memberService.withdraw(userDetails.getUsername());
+        memberOperationPort.withdraw(userDetails.getUsername());
         return ResponseEntity.ok().build();
     }
 }

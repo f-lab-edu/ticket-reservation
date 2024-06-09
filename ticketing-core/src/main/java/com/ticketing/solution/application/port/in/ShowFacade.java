@@ -1,9 +1,0 @@
-package com.ticketing.solution.application.port.in;
-
-import com.ticketing.solution.domain.show.Show;
-
-public interface ShowFacade {
-    void updateShow(Long showId, Show show, Long eventId, Long hallId);
-
-    void addShow(Show mapToShow, Long eventId, Long hallId);
-}
