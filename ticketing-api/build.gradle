@@ -6,12 +6,20 @@ dependencies {
     implementation 'org.springframework.session:spring-session-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
-    testImplementation 'org.springframework.security:spring-security-test'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    testImplementation 'com.tngtech.archunit:archunit-junit5:0.22.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 processResources {
     from '../shared-resources'
+}
+
+
+test {
+    useJUnitPlatform()
 }
 
 bootJar {

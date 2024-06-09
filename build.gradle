@@ -14,10 +14,6 @@ allprojects {
         mavenCentral()
         maven { url 'https://jitpack.io' }
     }
-
-    test {
-        useJUnitPlatform()
-    }
 }
 
 java {
@@ -36,11 +32,10 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation "org.springframework.boot:spring-boot-starter-data-jpa"
         implementation 'com.mysql:mysql-connector-j:8.2.0'
-        runtimeOnly 'com.h2database:h2'
 
-        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.0"
-        testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.0"
-        testImplementation "org.springframework.boot:spring-boot-starter-test"
+        testImplementation 'com.tngtech.archunit:archunit-junit5:0.22.0'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     }
 }
 
@@ -49,17 +44,8 @@ tasks.bootJar {
     enabled(false)
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
-}
-
-
-tasks.named("test") {
-    useJUnitPlatform()
 }
