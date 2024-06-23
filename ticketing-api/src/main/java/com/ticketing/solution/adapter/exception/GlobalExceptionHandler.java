@@ -1,6 +1,6 @@
 package com.ticketing.solution.adapter.exception;
 
-import com.ticketing.solution.application.port.in.exception.CustomException;
+import com.ticketing.solution.application.service.exception.CustomException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

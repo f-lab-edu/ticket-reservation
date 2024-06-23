@@ -6,7 +6,7 @@ public interface HallOperationPort {
 
     void addHall(Hall mapToHall);
 
-    void updateHall(Hall mapToHall);
+    void updateHall(Long hallId, Hall mapToHall);
 
     void deleteHall(Long hallId);
 }

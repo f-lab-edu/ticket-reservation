@@ -12,9 +12,9 @@ public interface ReservationOperationPort {
 
     Reservation getReservationByPayment(Payment payment);
 
-    List<Reservation> getReservations(int page, Member member);
+    void createReservation(Payment payment, Long showId, Member member);
 
-    void addReservation(Payment payment, Long showId, Member member);
+    List<Reservation> getReservations(int page, Member member);
 
     void cancelReservation(Long reservationId);
 

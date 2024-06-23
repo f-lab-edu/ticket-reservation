@@ -14,7 +14,5 @@ public interface ReservationPersistencePort {
 
     List<Reservation> findByMember(int page, Member member);
 
-    void deleteById(Long reservationId);
-
     Reservation findByPayment(Payment payment);
 }

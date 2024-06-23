@@ -1,9 +1,9 @@
-package com.ticketing.solution.application.operation;
+package com.ticketing.solution.application.service;
 
 import com.ticketing.solution.domain.member.Member;
 import com.ticketing.solution.application.port.in.MemberOperationPort;
-import com.ticketing.solution.application.port.in.exception.EmailDuplicateException;
-import com.ticketing.solution.application.port.in.exception.MemberNotFoundException;
+import com.ticketing.solution.application.service.exception.EmailDuplicateException;
+import com.ticketing.solution.application.service.exception.MemberNotFoundException;
 import com.ticketing.solution.application.port.out.persistence.MemberPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class MemberOperation implements MemberOperationPort {
+public class MemberService implements MemberOperationPort {
     private final MemberPersistencePort memberPersistencePort;
 
     @Override

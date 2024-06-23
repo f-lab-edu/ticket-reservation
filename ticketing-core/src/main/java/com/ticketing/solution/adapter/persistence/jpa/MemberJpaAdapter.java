@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
 @Repository
-public class MemberJpaAdapter implements MemberPersistencePort { // MemberOperationPort, ....
+public class MemberJpaAdapter implements MemberPersistencePort {
     private final MemberJpaRepository memberJpaRepository;
 
     private final MemberJpaMapper memberJpaMapper;

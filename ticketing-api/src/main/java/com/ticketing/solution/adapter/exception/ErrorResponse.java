@@ -1,6 +1,6 @@
 package com.ticketing.solution.adapter.exception;
 
-import com.ticketing.solution.application.port.in.exception.ErrorCode;
+import com.ticketing.solution.application.service.exception.ErrorCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

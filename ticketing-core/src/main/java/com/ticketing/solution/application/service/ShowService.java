@@ -1,4 +1,4 @@
-package com.ticketing.solution.application.operation;
+package com.ticketing.solution.application.service;
 
 import com.ticketing.solution.application.port.in.EventOperationPort;
 import com.ticketing.solution.application.port.in.HallOperationPort;
@@ -15,10 +15,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ShowOperation implements ShowOperationPort {
-
+public class ShowService implements ShowOperationPort {
     private final ShowPersistencePort showPersistencePort;
-    private final ShowOperationPort showOperationPort;
     private final EventOperationPort eventOperationPort;
     private final HallOperationPort hallOperationPort;
 
@@ -43,7 +41,7 @@ public class ShowOperation implements ShowOperationPort {
     @Override
     @Transactional
     public void updateShow(Long showId, Show mapToShow, Long eventId, Long hallId) {
-        Show show = showOperationPort.getShow(showId);
+        Show show = showPersistencePort.findById(showId);
         Event event = eventOperationPort.getEvent(eventId);
         Hall hall = hallOperationPort.getHall(hallId);
         show.update(mapToShow, event, hall);

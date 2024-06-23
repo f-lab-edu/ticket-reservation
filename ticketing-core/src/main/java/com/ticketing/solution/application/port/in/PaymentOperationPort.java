@@ -5,15 +5,11 @@ import com.ticketing.solution.domain.payment.Payment;
 import com.ticketing.solution.domain.payment.ProcessPrePaymentCommand;
 
 public interface PaymentOperationPort {
-    void save(Payment paymentResult);
-
     Payment getPaymentById(Long paymentId);
-
-    Payment getPaymentByMerchantUid(String merchantUid);
-
-    void cancelPayment(Payment payment);
 
     void postPaymentProcess(String impUid);
 
     void prePaymentProcess(ProcessPrePaymentCommand command, Member member);
+
+    void verifyPayment(Payment prePaymentInfo, Payment paymentInfo);
 }

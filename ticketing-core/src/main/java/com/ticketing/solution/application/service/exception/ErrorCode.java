@@ -1,4 +1,4 @@
-package com.ticketing.solution.application.port.in.exception;
+package com.ticketing.solution.application.service.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

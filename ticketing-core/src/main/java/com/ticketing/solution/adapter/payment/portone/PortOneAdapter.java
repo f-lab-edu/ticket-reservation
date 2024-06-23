@@ -3,7 +3,7 @@ package com.ticketing.solution.adapter.payment.portone;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
-import com.ticketing.solution.application.port.in.exception.PaymentFailedException;
+import com.ticketing.solution.application.service.exception.PaymentFailedException;
 import com.ticketing.solution.application.port.out.payment.ThirdPartyPaymentPort;
 import com.ticketing.solution.domain.payment.Payment;
 import lombok.RequiredArgsConstructor;

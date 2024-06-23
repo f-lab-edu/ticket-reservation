@@ -1,4 +1,4 @@
-package com.ticketing.solution.application.operation;
+package com.ticketing.solution.application.service;
 
 import com.ticketing.solution.application.port.in.HallOperationPort;
 import com.ticketing.solution.application.port.out.persistence.HallPersistencePort;
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class HallOperation implements HallOperationPort {
+public class HallService implements HallOperationPort {
     private final HallPersistencePort hallPersistencePort;
 
     @Override
@@ -26,7 +26,9 @@ public class HallOperation implements HallOperationPort {
 
     @Override
     @Transactional
-    public void updateHall(Hall hall) {
+    public void updateHall(Long hallId, Hall hallRequest) {
+        Hall hall = hallPersistencePort.findById(hallId);
+        hall.update(hallRequest);
         hallPersistencePort.update(hall);
     }
 

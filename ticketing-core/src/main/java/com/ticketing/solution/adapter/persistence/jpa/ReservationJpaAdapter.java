@@ -48,11 +48,6 @@ public class ReservationJpaAdapter implements ReservationPersistencePort {
     }
 
     @Override
-    public void deleteById(Long reservationId) {
-        reservationJpaRepository.deleteById(reservationId);
-    }
-
-    @Override
     public Reservation findByPayment(Payment payment) {
         var paymentEntity = paymentJpaMapper.mapToEntity(payment);
         return reservationJpaMapper.mapToDomain(reservationJpaRepository.findByPayment(paymentEntity).orElseThrow());

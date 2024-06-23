@@ -1,4 +1,4 @@
-package com.ticketing.solution.application.operation;
+package com.ticketing.solution.application.service;
 
 import com.ticketing.solution.domain.event.Event;
 import com.ticketing.solution.application.port.in.EventOperationPort;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class EventOperation implements EventOperationPort {
+public class EventService implements EventOperationPort {
     private final EventPersistencePort eventPersistencePort;
 
     @Override

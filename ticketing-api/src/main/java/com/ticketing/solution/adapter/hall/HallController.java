@@ -29,7 +29,7 @@ public class HallController {
 
     @PutMapping("/halls/{hallId}")
     public ResponseEntity<HallResponse> updateHall(@PathVariable Long hallId, HallRequest hallRequest) {
-        hallOperationPort.updateHall(hallWebMapper.mapToHall(hallId, hallRequest));
+        hallOperationPort.updateHall(hallId, hallWebMapper.mapToHall(hallRequest));
         return ResponseEntity.ok().build();
     }
 
