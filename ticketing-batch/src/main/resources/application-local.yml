@@ -1,0 +1,55 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ticketing
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+
+  session:
+    store-type: redis
+
+  data:
+    redis:
+      host: 127.0.0.1
+      password: 1234
+      port: 6379
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  logging:
+    level:
+      org.hibernate.SQL: debug
+
+  batch:
+    jdbc:
+      initialize-schema: always
+
+portone:
+  api:
+    key: PORTONE_API_KEY
+    secret: PORTONE_API_SECRET
+
+
+cors:
+  allow:
+    origins: http://localhost:8080
+
+
+chunk:
+  size: 100
+
+cronexpression: '0 0 0/1 * * ?'

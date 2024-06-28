@@ -1,8 +1,8 @@
 package com.ticketing.solution.application.service;
 
 import com.ticketing.solution.application.port.in.PaymentOperationPort;
-import com.ticketing.solution.application.service.exception.PaymentVerificationException;
 import com.ticketing.solution.application.port.out.payment.ThirdPartyPaymentPort;
+import com.ticketing.solution.application.service.exception.PaymentVerificationException;
 import com.ticketing.solution.domain.member.Member;
 import com.ticketing.solution.domain.payment.Payment;
 import com.ticketing.solution.domain.payment.ProcessPrePaymentCommand;
@@ -46,28 +46,28 @@ public class PaymentFacade implements PaymentOperationPort {
     public void postPaymentProcess(String impUid){
         Payment portOnePaymentInfo = thirdPartyPaymentService.getPaymentInfo(impUid);
         Payment prePaymentInfo = paymentService.getPaymentByMerchantUid(portOnePaymentInfo.getMerchantUid());
-        verifyPayment(prePaymentInfo, portOnePaymentInfo);
+        if (!verifyPayment(prePaymentInfo, portOnePaymentInfo)){
+            cancelPayment(impUid, prePaymentInfo.getId());
+            throw new PaymentVerificationException();
+        }
         approvePayment(prePaymentInfo);
-        approveReservation(prePaymentInfo);
+    }
+
+    public boolean verifyPayment(Payment prePaymentInfo, Payment paymentInfo) {
+        return paymentInfo.getAmount().equals(prePaymentInfo.getAmount());
     }
 
     @Override
-    public void verifyPayment(Payment prePaymentInfo, Payment paymentInfo) {
-        boolean isInvalidAmount = !paymentInfo.getAmount().equals(prePaymentInfo.getAmount());
-        if (isInvalidAmount) {
-            thirdPartyPaymentService.cancelPayment(paymentInfo.getImpUid());
-            reservationFacade.cancelReservation(prePaymentInfo.getId());
-            throw new PaymentVerificationException();
-        }
+    @Transactional
+    public void cancelPayment(String impUid, Long paymentId) {
+        thirdPartyPaymentService.cancelPayment(impUid);
+        reservationFacade.cancelReservation(paymentId);
     }
 
     private void approvePayment(Payment payment) {
-        payment.setApproved(true);
-        paymentService.save(payment);
-    }
-
-    private void approveReservation(Payment payment) {
         Reservation reservation = reservationFacade.getReservationByPayment(payment);
         reservationFacade.approveReservation(reservation);
+        payment.setApproved(true);
+        paymentService.save(payment);
     }
 }

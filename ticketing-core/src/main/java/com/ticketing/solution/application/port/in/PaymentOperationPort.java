@@ -11,5 +11,5 @@ public interface PaymentOperationPort {
 
     void prePaymentProcess(ProcessPrePaymentCommand command, Member member);
 
-    void verifyPayment(Payment prePaymentInfo, Payment paymentInfo);
+    void cancelPayment(String impUid, Long paymentId);
 }
