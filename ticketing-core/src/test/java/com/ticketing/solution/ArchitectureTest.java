@@ -42,7 +42,7 @@ public class ArchitectureTest {
     }
 
     @Test
-    void service_annotation_should_only_be_used_in_application_layer() {
+    void configure_annotation_should_only_be_used_in_config_package() {
         final ArchRule rule = ArchRuleDefinition.classes().that().areAnnotatedWith(Configuration.class)
                 .should().resideInAPackage("..adapter.config..");
         rule.check(classes);
