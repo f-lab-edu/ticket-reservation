@@ -1,4 +1,4 @@
-package com.ticketing.solution.adapter.config.security;
+package com.ticketing.solution.adapter.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,7 +1,7 @@
 package com.ticketing.solution.adapter.reservation;
 
 import com.ticketing.solution.application.port.in.ReservationOperationPort;
-import com.ticketing.solution.adapter.config.security.UserDetailsImpl;
+import com.ticketing.solution.adapter.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

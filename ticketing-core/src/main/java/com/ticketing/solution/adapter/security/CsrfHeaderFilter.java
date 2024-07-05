@@ -1,4 +1,4 @@
-package com.ticketing.solution.adapter.config.security;
+package com.ticketing.solution.adapter.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

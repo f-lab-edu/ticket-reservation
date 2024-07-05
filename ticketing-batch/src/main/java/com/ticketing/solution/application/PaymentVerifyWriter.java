@@ -50,6 +50,6 @@ public class PaymentVerifyWriter implements ItemWriter<Payment> {
                 "UPDATE reservation r " +
                         "JOIN payment p ON r.payment_id = p.id " +
                         "SET r.status = '%d', p.approved = %b " +
-                        "WHERE p.id IN (%s)", ReservationStatus.RESERVED.ordinal(), true, ids));
+                        "WHERE p.id IN (%s)", ReservationStatus.RESERVED.getDbValue(), true, ids));
     }
 }

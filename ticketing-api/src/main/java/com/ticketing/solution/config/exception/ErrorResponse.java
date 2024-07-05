@@ -1,4 +1,4 @@
-package com.ticketing.solution.adapter.exception;
+package com.ticketing.solution.config.exception;
 
 import com.ticketing.solution.application.service.exception.ErrorCode;
 import lombok.Getter;

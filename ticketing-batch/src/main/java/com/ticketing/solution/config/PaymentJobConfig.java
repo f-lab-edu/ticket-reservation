@@ -17,13 +17,11 @@ import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
-@Import(DataSourceConfiguration.class)
 public class PaymentJobConfig {
     @Value("${chunk.size}")
     private int chunkSize;

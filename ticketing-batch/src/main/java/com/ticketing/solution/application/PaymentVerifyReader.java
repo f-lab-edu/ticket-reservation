@@ -1,6 +1,7 @@
 package com.ticketing.solution.application;
 
 import com.ticketing.solution.domain.payment.Payment;
+import com.ticketing.solution.domain.reservation.ReservationStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.database.JdbcCursorItemReader;
@@ -28,10 +29,10 @@ public class PaymentVerifyReader {
                 .fetchSize(chunkSize)
                 .dataSource(dataSource)
                 .rowMapper(new DataClassRowMapper<Payment>(Payment.class))
-                .sql("SELECT p.id, p.merchantUid, p.amount " +
+                .sql(String.format("SELECT p.id, p.merchantUid, p.amount " +
                         "FROM payment p " +
                         "JOIN reservation r ON r.payment_id = p.id " +
-                        "WHERE r.status = 2")
+                        "WHERE r.status = %d", ReservationStatus.PENDING.getDbValue()))
                 .build();
     }
 }
