@@ -28,8 +28,12 @@ spring:
     job:
       name: ${job.name:NONE}
 
-chunk:
-  size: ${chunk.size:100}
+job:
+  chunk:
+    size: ${chunk.size:100}
+  waitingJob:
+    timeout: 7
+    showId: ${job.waitingQueue.showId:1}
 
 portone:
   api:
