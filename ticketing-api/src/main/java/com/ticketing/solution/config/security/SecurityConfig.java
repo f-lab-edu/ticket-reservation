@@ -1,5 +1,7 @@
-package com.ticketing.solution.adapter.config.security;
+package com.ticketing.solution.config.security;
 
+import com.ticketing.solution.adapter.security.CsrfHeaderFilter;
+import com.ticketing.solution.adapter.security.LoginAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

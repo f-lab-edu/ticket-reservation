@@ -1,4 +1,4 @@
-package com.ticketing.solution.adapter.config.security;
+package com.ticketing.solution.config.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

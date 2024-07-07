@@ -1,4 +1,4 @@
-package com.ticketing.solution.adapter.config.security;
+package com.ticketing.solution.adapter.security;
 
 import com.ticketing.solution.application.port.out.persistence.MemberPersistencePort;
 import com.ticketing.solution.domain.member.Member;

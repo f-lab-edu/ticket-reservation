@@ -1,6 +1,6 @@
 package com.ticketing.solution.adapter.pay;
 
-import com.ticketing.solution.adapter.config.security.UserDetailsImpl;
+import com.ticketing.solution.adapter.security.UserDetailsImpl;
 import com.ticketing.solution.application.port.in.PaymentOperationPort;
 import com.ticketing.solution.domain.payment.ProcessPrePaymentCommand;
 import lombok.RequiredArgsConstructor;
