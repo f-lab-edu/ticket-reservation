@@ -1,11 +1,17 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.session:spring-session-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    testImplementation 'org.springframework.security:spring-security-test'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.github.iamport:iamport-rest-client-java:0.2.23'
+    implementation 'io.lettuce:lettuce-core:6.1.5.RELEASE'
 
+    implementation 'io.github.resilience4j:resilience4j-spring-boot3:2.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.1"
+    testImplementation "org.testcontainers:testcontainers:1.17.6"
+    testImplementation "org.testcontainers:junit-jupiter:1.17.6"
     testImplementation 'com.tngtech.archunit:archunit-junit5:0.22.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

@@ -35,9 +35,14 @@ public class ReservationJpaAdapter implements ReservationPersistencePort {
     }
 
     @Override
-    public Reservation findById(Long reservationId) {
-        var reservation = reservationJpaRepository.findById(reservationId).orElseThrow();
+    public Reservation findByIdAndMember(Long reservationId, Member member) {
+        var reservation = reservationJpaRepository.findByIdAndMember(reservationId, memberJpaMapper.mapToEntity(member)).orElseThrow();
         return reservationJpaMapper.mapToDomain(reservation);
+    }
+
+    @Override
+    public Reservation findById(Long reservationId) {
+        return reservationJpaMapper.mapToDomain(reservationJpaRepository.findById(reservationId).orElseThrow());
     }
 
     @Override

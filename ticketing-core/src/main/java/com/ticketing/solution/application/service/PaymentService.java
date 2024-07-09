@@ -1,10 +1,9 @@
 package com.ticketing.solution.application.service;
 
 import com.ticketing.solution.application.port.out.persistence.PaymentPersistencePort;
+import com.ticketing.solution.domain.member.Member;
 import com.ticketing.solution.domain.payment.Payment;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,9 +22,8 @@ public class PaymentService {
     }
 
     @Transactional(readOnly = true)
-    @PostAuthorize("returnObject.member.email == authentication.name")
-    public Payment getPaymentById(Long paymentId) {
-        return paymentPersistencePort.findById(paymentId);
+    public Payment getPaymentByIdAndMember(Long paymentId, Member member) {
+        return paymentPersistencePort.findByIdAndMember(paymentId, member);
     }
 
     @Transactional(readOnly = true)
@@ -33,7 +31,6 @@ public class PaymentService {
         return paymentPersistencePort.findByMerchantUid(merchantUid);
     }
 
-    @PreAuthorize("#payment.member.email == authentication.name")
     @Transactional
     public void cancelPayment(Payment payment) {
         payment.setCancelDate(Date.from(Instant.from(LocalDate.now())));

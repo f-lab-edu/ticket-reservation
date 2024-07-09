@@ -39,3 +39,4 @@ node_modules/
 package.json
 package-lock.json
 ticketing-core/src/main/resources/static/index.html
+ticketing-batch/src/main/resources/data.sql

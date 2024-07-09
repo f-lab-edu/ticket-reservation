@@ -30,7 +30,7 @@ public class PaymentController {
     }
 
     @GetMapping("/payments/{paymentId}")
-    public ResponseEntity<PaymentResponse> getPayment(@PathVariable Long paymentId) {
-        return ResponseEntity.ok(paymentWebMapper.mapToPaymentResponse(paymentOperationPort.getPaymentById(paymentId)));
+    public ResponseEntity<PaymentResponse> getPayment(@PathVariable Long paymentId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return ResponseEntity.ok(paymentWebMapper.mapToPaymentResponse(paymentOperationPort.getPaymentById(paymentId, userDetails.getMember())));
     }
 }
