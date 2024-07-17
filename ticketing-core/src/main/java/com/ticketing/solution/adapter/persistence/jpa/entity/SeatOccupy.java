@@ -11,39 +11,33 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-
-@Getter
-@Builder
-@Entity
-@Table(name = "seat")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Getter
+@Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Seat {
+@Table(name = "seat_occupy")
+public class SeatOccupy {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "capacity", nullable = false)
-    private int capacity;
+    @ManyToOne
+    @JoinColumn(name = "seat_id", nullable = false)
+    private Seat seat;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
+
+    @Column(name = "is_reserved", nullable = false, columnDefinition = "boolean default false")
+    private boolean isReserved;
 
     @CreatedDate
     private LocalDateTime createdDate;
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hall_id")
-    private Hall hall;
-
-    @ManyToOne
-    @JoinColumn(name = "seat_class_id", nullable = false)
-    private SeatClass seatClass;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "show_id")
-    private Show show;
 
 }

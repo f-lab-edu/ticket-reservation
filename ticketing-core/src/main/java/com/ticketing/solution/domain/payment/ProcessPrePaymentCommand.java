@@ -7,9 +7,7 @@ import java.math.BigDecimal;
 @Builder
 public record ProcessPrePaymentCommand(
         String merchantUid,
-
-        Long showId,
-
+        Long seatId,
         BigDecimal amount
 ) {
 }

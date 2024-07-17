@@ -23,7 +23,7 @@ public class PaymentWebMapper {
     public ProcessPrePaymentCommand mapToProcessPrePaymentCommand(PaymentPreRequest paymentRequest) {
         return ProcessPrePaymentCommand.builder()
                 .merchantUid(paymentRequest.merchantUid())
-                .showId(paymentRequest.showId())
+                .seatId(paymentRequest.seatId())
                 .amount(paymentRequest.amount())
                 .build();
     }

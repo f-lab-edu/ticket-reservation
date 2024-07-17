@@ -19,6 +19,9 @@ public record PaymentPreRequest(
         Long showId,
 
         @NotNull
+        Long seatId,
+
+        @NotNull
         @Positive
         BigDecimal amount
 ) {
