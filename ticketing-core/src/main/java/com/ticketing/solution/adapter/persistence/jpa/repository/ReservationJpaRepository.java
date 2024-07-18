@@ -13,4 +13,6 @@ public interface ReservationJpaRepository extends JpaRepository<Reservation, Lon
     List<Reservation> findByMember(PageRequest page, Member member);
 
     Optional<Reservation> findByPayment(Payment payment);
+
+    Optional<Reservation> findByIdAndMember(Long reservationId, Member member);
 }

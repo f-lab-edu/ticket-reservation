@@ -24,8 +24,8 @@ public class PaymentFacade implements PaymentOperationPort {
 
     @Override
     @Transactional(readOnly = true)
-    public Payment getPaymentById(Long paymentId) {
-        return paymentService.getPaymentById(paymentId);
+    public Payment getPaymentById(Long paymentId, Member member) {
+        return paymentService.getPaymentByIdAndMember(paymentId, member);
     }
 
     @Override

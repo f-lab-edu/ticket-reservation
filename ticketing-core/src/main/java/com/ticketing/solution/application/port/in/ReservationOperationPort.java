@@ -18,6 +18,8 @@ public interface ReservationOperationPort {
 
     void cancelReservation(Long reservationId);
 
+    void cancelReservation(Long reservationId, Member member);
+
     void approveReservation(Reservation reservation);
 
 }

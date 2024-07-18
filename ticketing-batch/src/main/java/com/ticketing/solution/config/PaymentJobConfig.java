@@ -23,7 +23,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @RequiredArgsConstructor
 @Slf4j
 public class PaymentJobConfig {
-    @Value("${chunk.size}")
+    @Value("${job.chunk.size}")
     private int chunkSize;
 
     private final PaymentVerifyWriter paymentVerifyWriter;

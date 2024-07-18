@@ -5,7 +5,7 @@ import com.ticketing.solution.domain.payment.Payment;
 import com.ticketing.solution.domain.payment.ProcessPrePaymentCommand;
 
 public interface PaymentOperationPort {
-    Payment getPaymentById(Long paymentId);
+    Payment getPaymentById(Long paymentId, Member member);
 
     void postPaymentProcess(String impUid);
 

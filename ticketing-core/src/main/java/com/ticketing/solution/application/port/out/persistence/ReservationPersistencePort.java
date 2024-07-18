@@ -10,6 +10,8 @@ import java.util.List;
 public interface ReservationPersistencePort {
     Reservation save(Reservation reservation);
 
+    Reservation findByIdAndMember(Long reservationId, Member member);
+
     Reservation findById(Long reservationId);
 
     List<Reservation> findByMember(int page, Member member);

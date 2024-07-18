@@ -46,6 +46,4 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
         String password = request.getParameter(PASSWORD_PARAMETER);
         return new UsernamePasswordAuthenticationToken(username, password);
     }
-
-
 }

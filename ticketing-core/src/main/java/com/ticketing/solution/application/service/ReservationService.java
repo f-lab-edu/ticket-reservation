@@ -6,7 +6,6 @@ import com.ticketing.solution.domain.payment.Payment;
 import com.ticketing.solution.domain.reservation.Reservation;
 import com.ticketing.solution.domain.reservation.ReservationStatus;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,10 +21,15 @@ public class ReservationService {
         return reservationPersistencePort.findByMember(page, member);
     }
 
-    @PostAuthorize("returnObject.member.email == authentication.name")
     @Transactional(readOnly = true)
     public Reservation getReservationById(Long reservationId) {
         return reservationPersistencePort.findById(reservationId);
+    }
+
+    @Transactional
+    public Reservation getReservationByIdAndMember(Long reservationId, Member member) {
+        return reservationPersistencePort.findByIdAndMember(reservationId, member);
+
     }
 
     @Transactional(readOnly = true)

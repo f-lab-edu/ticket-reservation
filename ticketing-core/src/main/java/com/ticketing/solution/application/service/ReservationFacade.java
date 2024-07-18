@@ -46,6 +46,16 @@ public class ReservationFacade implements ReservationOperationPort {
     }
 
     @Override
+    @Transactional
+    public void cancelReservation(Long reservationId, Member member) {
+        Reservation reservation = reservationService.getReservationByIdAndMember(reservationId, member);
+        reservation.setStatus(ReservationStatus.CANCELED);
+        reservationService.addReservation(reservation);
+
+        paymentService.cancelPayment(reservation.getPayment());
+    }
+
+    @Override
     public Reservation getReservationById(Long reservationId) {
         return reservationService.getReservationById(reservationId);
     }
