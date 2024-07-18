@@ -2,6 +2,8 @@ package com.ticketing.solution.adapter.persistence.jpa.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -9,6 +11,8 @@ import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Getter
 @Entity
 @Table(name = "seat_class")
 public class SeatClass {

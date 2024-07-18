@@ -20,7 +20,9 @@ public enum ErrorCode {
 
     PAYMENT_VERIFICATION_FAILED(HttpStatus.BAD_REQUEST, "P100", "결제 정보가 일치하지 않습니다."),
     PAYMENT_DUPLICATION(HttpStatus.CONFLICT, "P101", "이미 결제된 주문입니다."),
-    PAYMENT_FAILED(HttpStatus.BAD_REQUEST, "P200", "결제에 실패하였습니다.");
+    PAYMENT_FAILED(HttpStatus.BAD_REQUEST, "P200", "결제에 실패하였습니다."),
+
+    SEAT_ALREADY_OCCUPIED(HttpStatus.CONFLICT, "S100", "이미 예약된 좌석입니다.");
 
     private HttpStatus status;
     private String code;

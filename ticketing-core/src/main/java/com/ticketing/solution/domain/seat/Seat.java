@@ -1,10 +1,8 @@
 package com.ticketing.solution.domain.seat;
 
 import com.ticketing.solution.domain.hall.Hall;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.ticketing.solution.domain.show.Show;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 public class Seat {
     private Long id;
     private int capacity;
@@ -19,4 +18,5 @@ public class Seat {
     private LocalDateTime modifiedDate;
     private Hall hall;
     private SeatClass seatClass;
+    private Show show;
 }
