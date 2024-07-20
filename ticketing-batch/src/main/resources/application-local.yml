@@ -28,6 +28,10 @@ spring:
     job:
       name: ${job.name:NONE}
 
+job:
+  seatOccupyJob:
+    showId: ${job.seatOccupyJob.showId:1}
+
 chunk:
   size: ${chunk.size:100}
 

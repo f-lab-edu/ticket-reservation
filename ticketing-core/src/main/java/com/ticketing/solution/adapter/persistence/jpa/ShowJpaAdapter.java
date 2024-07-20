@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class ShowPersistenceAdapter implements ShowPersistencePort {
+public class ShowJpaAdapter implements ShowPersistencePort {
     private final ShowJpaRepository showJpaRepository;
     private final ShowJpaMapper showJpaMapper;
 

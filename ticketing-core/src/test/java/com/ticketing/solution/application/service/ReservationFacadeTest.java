@@ -33,13 +33,12 @@ public class ReservationFacadeTest {
     @Test
     public void createReservationShouldCallAddReservation() {
         Payment payment = new Payment();
-        Long showId = 1L;
-        Member member = new Member();
         Show show = new Show();
+        Member member = new Member();
 
-        when(showService.getShow(showId)).thenReturn(show);
+        when(showService.getShow(any())).thenReturn(show);
 
-        reservationFacade.createReservation(payment, showId, member);
+        reservationFacade.createReservation(payment, show, member);
 
         verify(reservationService, times(1)).addReservation(any(Reservation.class));
     }

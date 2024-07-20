@@ -13,4 +13,10 @@ public interface SeatOperationPort {
     void addSeat(Seat seat);
 
     void occupySeat(Long seatId, Member member);
+
+    void increaseSeatCapacity(Long seatId);
+
+    Seat getSeatWithLock(Long seatId);
+
+    void verifyPermission(Long seatId, Member member);
 }

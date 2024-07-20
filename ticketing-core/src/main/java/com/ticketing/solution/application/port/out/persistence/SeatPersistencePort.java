@@ -8,9 +8,12 @@ import java.util.List;
 public interface SeatPersistencePort {
     Seat getSeat(Long seatId);
 
+    Seat getSeatWithLock(Long seatId);
     List<Seat> getSeats(Long showId);
 
-    void addSeat(Seat seat);
+    Seat addSeat(Seat seat);
 
-    void occupySeat(Long seatId, Member member);
+    void occupySeat(Seat seat, Member member);
+
+    void increaseSeatCapacity(Long seatId);
 }

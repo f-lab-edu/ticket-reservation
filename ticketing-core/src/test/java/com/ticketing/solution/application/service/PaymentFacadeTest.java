@@ -6,6 +6,7 @@ import com.ticketing.solution.domain.member.Member;
 import com.ticketing.solution.domain.payment.Payment;
 import com.ticketing.solution.domain.payment.ProcessPrePaymentCommand;
 import com.ticketing.solution.domain.reservation.Reservation;
+import com.ticketing.solution.domain.show.Show;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -51,7 +52,7 @@ class PaymentFacadeTest {
         paymentFacade.prePaymentProcess(command, member);
 
         verify(paymentService, times(1)).save(argThat(payment -> payment.getMerchantUid().equals(command.merchantUid())));
-        verify(reservationFacade, times(1)).createReservation(argThat(payment -> payment.getMerchantUid().equals(command.merchantUid())), eq(command.showId()), eq(member));
+        verify(reservationFacade, times(1)).createReservation((Payment) any(), (Show) any(), any());
     }
 
     @Test

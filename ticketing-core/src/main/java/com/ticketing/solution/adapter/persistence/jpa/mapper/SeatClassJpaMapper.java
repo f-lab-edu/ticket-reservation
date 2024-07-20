@@ -12,6 +12,7 @@ public class SeatClassJpaMapper {
 
     public SeatClass mapToDomain(com.ticketing.solution.adapter.persistence.jpa.entity.SeatClass seatClass) {
         return SeatClass.builder()
+                .id(seatClass.getId())
                 .show(showJpaMapper.mapToDomain(seatClass.getShow()))
                 .price(seatClass.getPrice())
                 .name(seatClass.getName())
@@ -20,6 +21,7 @@ public class SeatClassJpaMapper {
 
     public com.ticketing.solution.adapter.persistence.jpa.entity.SeatClass mapToEntity(SeatClass seatClass) {
         return com.ticketing.solution.adapter.persistence.jpa.entity.SeatClass.builder()
+                .id(seatClass.getId())
                 .show(showJpaMapper.mapToEntity(seatClass.getShow()))
                 .price(seatClass.getPrice())
                 .name(seatClass.getName())

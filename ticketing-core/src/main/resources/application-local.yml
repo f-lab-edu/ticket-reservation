@@ -32,3 +32,35 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+    io.github.resilience4j: debug
+
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 20
+        permittedNumberOfCallsInHalfOpenState: 10
+        waitDurationInOpenState: 30s
+        failureRateThreshold: 50
+        slowCallDurationThreshold: 3s
+        slowCallRateThreshold: 50
+        eventConsumerBufferSize: 10
+        recordExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.HttpServerErrorException
+          - com.ticketing.solution.application.service.exception.PaymentFailedException
+        ignoreExceptions:
+          - org.springframework.web.client.HttpClientErrorException
+    instances:
+      portOnePaymentApi:
+        baseConfig: default
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 30
+        permittedNumberOfCallsInHalfOpenState: 15
+        waitDurationInOpenState: 1m
+        failureRateThreshold: 40

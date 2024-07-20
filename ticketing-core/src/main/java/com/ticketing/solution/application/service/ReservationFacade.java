@@ -1,6 +1,7 @@
 package com.ticketing.solution.application.service;
 
 import com.ticketing.solution.application.port.in.ReservationOperationPort;
+import com.ticketing.solution.application.port.in.SeatOperationPort;
 import com.ticketing.solution.domain.member.Member;
 import com.ticketing.solution.domain.payment.Payment;
 import com.ticketing.solution.domain.reservation.Reservation;
@@ -22,10 +23,11 @@ public class ReservationFacade implements ReservationOperationPort {
 
     private final ShowService showService;
 
+    private final SeatOperationPort seatOperationPort;
+
     @Override
     @Transactional
-    public void createReservation(Payment payment, Long showId, Member member) {
-        Show show = showService.getShow(showId);
+    public void createReservation(Payment payment, Show show, Member member) {
         Reservation reservation = Reservation.builder()
                 .status(ReservationStatus.PENDING)
                 .show(show)
