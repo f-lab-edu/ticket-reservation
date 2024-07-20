@@ -26,14 +26,23 @@ spring:
     jdbc:
       initialize-schema: always
     job:
+      enabled: false
       name: ${job.name:NONE}
 
 job:
-  chunk:
-    size: ${chunk.size:100}
+  seatOccupyJob:
+    showId: ${job.seatOccupyJob.showId:6}
   waitingJob:
     timeout: 7
-    showId: ${job.waitingQueue.showId:1}
+    showId: ${job.waitingQueue.showId:6}
+  lock:
+    key: ${job.lockKey:LOCK}
+  chunk:
+    size: ${chunk.size:100}
+
+scheduler:
+  job:
+    name: ${job.schedulerJob.name:waitingJob}
 
 portone:
   api:
@@ -47,3 +56,5 @@ logging:
         SQL: debug
         type: trace
 
+
+cronexpression: '0/1 * * * * ?'
