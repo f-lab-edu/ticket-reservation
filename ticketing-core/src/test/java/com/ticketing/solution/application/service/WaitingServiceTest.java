@@ -1,5 +1,6 @@
 package com.ticketing.solution.application.service;
 
+import com.ticketing.solution.application.service.util.WaitingQueueKeyUtil;
 import com.ticketing.solution.domain.member.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,13 +22,16 @@ public class WaitingServiceTest {
     @Mock
     private ZSetOperations<String, String> zSetOperations;
 
+    @Mock
+    private WaitingQueueKeyUtil waitingQueueKeyUtil;
+
     private WaitingService waitingService;
 
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
         when(redisTemplate.opsForZSet()).thenReturn(zSetOperations);
-        waitingService = new WaitingService(redisTemplate);
+        waitingService = new WaitingService(redisTemplate, waitingQueueKeyUtil);
     }
 
     @Test

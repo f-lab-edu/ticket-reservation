@@ -1,7 +1,7 @@
 package com.ticketing.solution.application.service;
 
+import com.ticketing.solution.application.service.util.WaitingQueueKeyUtil;
 import com.ticketing.solution.domain.member.Member;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -12,6 +12,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @Testcontainers
 public class WaitingServiceIntegrationTest {
@@ -22,6 +23,7 @@ public class WaitingServiceIntegrationTest {
 
     private RedisTemplate<String, String> redisTemplate;
     private WaitingService waitingService;
+    private WaitingQueueKeyUtil waitingQueueKeyUtil;
 
     @BeforeEach
     public void setup() {
@@ -36,7 +38,9 @@ public class WaitingServiceIntegrationTest {
         redisTemplate.setConnectionFactory(lettuceConnectionFactory);
         redisTemplate.afterPropertiesSet();
 
-        waitingService = new WaitingService(redisTemplate);
+        waitingQueueKeyUtil = new WaitingQueueKeyUtil();
+
+        waitingService = new WaitingService(redisTemplate, waitingQueueKeyUtil);
     }
 
     @Test
@@ -88,7 +92,8 @@ public class WaitingServiceIntegrationTest {
                 .email("test@example.com")
                 .build();
 
-        redisTemplate.opsForValue().set("activateQueue:" + member.getEmail(), "1");
+        String key = waitingQueueKeyUtil.getActivateQueueUserKey(showId, member.getEmail());
+        when(redisTemplate.opsForValue().get(key)).thenReturn("1");
 
         boolean exists = waitingService.isExistInActivateQueue(showId, member);
 
