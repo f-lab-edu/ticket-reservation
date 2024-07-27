@@ -27,22 +27,22 @@ spring:
       initialize-schema: always
     job:
       enabled: false
-      name: ${job.name:NONE}
+      name: ${job.name}
 
 job:
   seatOccupyJob:
-    showId: ${job.seatOccupyJob.showId:6}
+    showId: ${job.seatOccupyJob.showId}
   waitingJob:
     timeout: 7
-    showId: ${job.waitingQueue.showId:6}
+    showId: ${job.waitingQueue.showId}
   lock:
-    key: ${job.lockKey:LOCK}
+    key: ${job.lockKey}
   chunk:
-    size: ${chunk.size:100}
+    size: ${chunk.size}
 
 scheduler:
   job:
-    name: ${job.schedulerJob.name:waitingJob}
+    name: ${job.schedulerJob.name}
 
 portone:
   api:

@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 @Service
 @RequiredArgsConstructor
 public class PaymentVerifyReader {
-    @Value("${chunk.size}")
+    @Value("${job.chunk.size}")
     private int chunkSize;
 
     private final DataSource dataSource;
